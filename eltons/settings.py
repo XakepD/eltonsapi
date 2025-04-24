@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-leek96g2w&17sv&r&tj9ybg+d77@b90jxd83$)tertjzb8!a@(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['eltonsapi.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
