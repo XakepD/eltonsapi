@@ -135,7 +135,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 STATIC_HOST = os.environ.get("DJANGO_STATIC_HOST", "")
 STATIC_URL = STATIC_HOST + "/static/"
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
@@ -146,6 +146,7 @@ STORAGES = {
     },
 }
 MEDIA_URL = 'images/'
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
