@@ -7,7 +7,26 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
+class GalleryImageViewSet(APIView):
+    def get(self, request, slug):
+        gallery = get_object_or_404(Gallery, slug=slug)
+        images = GalleryImage.objects.filter(gallery=gallery)
+        data = {
+            "gallery_title": gallery.title,
+            "gallery_description": gallery.description,
+            "images": [
+                {
+                    "id": image.id,
+                    "image": image.image.url,
+                    "gallery": {"name": gallery.title},
+                }
+                for image in images
+            ],
+        }
+        return Response(data)
 class AdminLoginView(ObtainAuthToken):
     """
     ViewSet for admin login to generate an authentication token.
@@ -48,17 +67,6 @@ class GalleryViewSet(viewsets.ModelViewSet):
     queryset = Gallery.objects.all()
     serializer_class = GallerySerializer
 
-class GalleryImageViewSet(viewsets.ModelViewSet):
-    """
-    ViewSet for performing CRUD operations on GalleryImage.
-    Filters images based on the Gallery slug.
-    """
-    serializer_class = GalleryImageSerializer
-
-    def get_queryset(self):
-        gallery_slug = self.kwargs.get('slug')  # Retrieve the slug from the URL
-        gallery = get_object_or_404(Gallery, slug=gallery_slug)  # Get the Gallery object
-        return GalleryImage.objects.filter(gallery=gallery)  # Filter images by the gallery
 
 class GalleryImagesViewSet(viewsets.ModelViewSet):
     """
@@ -76,4 +84,4 @@ class RandomGalleryImageViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         all_images = list(GalleryImage.objects.all())  # Get all images as a list
-        return random.sample(all_images, min(len(all_images), 5))  # Select up to 5 random images
+        return random.sample(all_images, min(len(all_images), 8))  # Select up to 5 random images

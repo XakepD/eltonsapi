@@ -12,7 +12,10 @@ router.register(r'random-images', RandomGalleryImageViewSet, basename='random-ga
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("gallery/<slug:slug>/images/", GalleryImageViewSet.as_view({'get': 'list'}), name="gallery-images"),
+    
+    path("image/<slug:slug>/", GalleryImageViewSet.as_view(), name="gallery-images"),
+
+
     path("admin-login/", AdminLoginView.as_view(), name="admin-login"),
     
     

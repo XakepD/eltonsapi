@@ -33,8 +33,8 @@ ALLOWED_HOSTS = ['eltonsapi.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
-
 INSTALLED_APPS = [
+    'unfold',  # Add Unfold before 'django.contrib.admin'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,7 +47,17 @@ INSTALLED_APPS = [
     'corsheaders',
     'whitenoise.runserver_nostatic',
     'whitenoise',
+    'django.contrib.sites',  # Required for django-allauth
+    
 ]
+
+# Unfold settings (optional, customize as needed)
+UNFOLD = {
+    'SITE_TITLE': 'Eltons Admin',  # Title for the admin site
+    'SITE_HEADER': 'Eltons Administration',  # Header for the admin site
+    'INDEX_TITLE': 'Welcome to Eltons Admin Panel',  # Title for the admin index page
+    'SHOW_COLLAPSE': True,  # Enable collapsible fieldsets
+}
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -139,7 +149,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = 'images/'
 

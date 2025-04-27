@@ -25,4 +25,28 @@ class GalleryImage(models.Model):
         return f"Image for {self.gallery.title}"
 
 
+class CarouselImages(models.Model):
+    image = models.ImageField(upload_to='carousels/')
+    title = models.CharField(max_length=200)
+    info = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.title
+class JuniorCarousel(models.Model):
+    image = models.ImageField(upload_to='carousels/')
+    title = models.CharField(max_length=200)
+    info = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.title
+class SeniorCarousel(models.Model):
+    image = models.ImageField(upload_to='carousels/')
+    title = models.CharField(max_length=200)
+    info = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.title
+
+
+
     

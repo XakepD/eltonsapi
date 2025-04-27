@@ -11,4 +11,4 @@ class GallerySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Gallery
-        fields = '__all__'
+        fields = ['id', 'title', 'image', 'description', 'slug', 'created_at', 'images']
