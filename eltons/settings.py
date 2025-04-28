@@ -46,8 +46,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'whitenoise.runserver_nostatic',
-    'whitenoise',
-    'django.contrib.sites',  # Required for django-allauth
+    'whitenoise',  # Required for django-allauth
     
 ]
 
