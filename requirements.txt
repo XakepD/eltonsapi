@@ -2,10 +2,10 @@ appdirs==1.4.4
 asgiref==3.8.1
 Django==5.2
 django-autoslug==1.9.9
-django-cors-headers==4.7.0      
-django-rest-framework==0.1.0    
+django-cors-headers==4.7.0
+django-rest-framework==0.1.0        
 django-unfold==0.55.3
-djangorestframework==3.16.0     
+djangorestframework==3.16.0
 fs==2.4.16
 gunicorn==23.0.0
 inflection==0.5.1

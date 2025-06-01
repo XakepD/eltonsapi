@@ -1,11 +1,13 @@
 from django.db import models
-import autoslug
+from autoslug import AutoSlugField # Correct import
+
+
 # Create your models here.
 class Gallery(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField(upload_to='gallery/')
-    slug = autoslug.AutoSlugField(populate_from='title', unique=True, always_update=True)
+    slug = AutoSlugField(populate_from='title', unique=True, always_update=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

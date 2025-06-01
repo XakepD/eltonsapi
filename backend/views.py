@@ -9,6 +9,8 @@ from rest_framework.views import APIView
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.views import APIView
+import random
+from django.db.models import Q
 
 class GalleryImageViewSet(APIView):
     def get(self, request, slug):
@@ -74,14 +76,23 @@ class GalleryImagesViewSet(viewsets.ModelViewSet):
     """
     queryset = GalleryImage.objects.all()
     serializer_class = GalleryImageSerializer
-import random
+
+
 
 class RandomGalleryImageViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    ViewSet for retrieving 5 random images from the GalleryImage model.
+    ViewSet for retrieving random images from the GalleryImage model,
+    excluding images from the Portraits gallery.
     """
     serializer_class = GalleryImageSerializer
 
     def get_queryset(self):
-        all_images = list(GalleryImage.objects.all())  # Get all images as a list
-        return random.sample(all_images, min(len(all_images), 8))  # Select up to 5 random images
+        # Get all images that are not in the Portraits gallery
+        ex = Gallery.objects.get(title='Portraits')
+        non_portrait_images = GalleryImage.objects.filter(
+            ~Q(gallery=ex)
+        )
+        
+        # Convert to list and select random samples
+        image_list = list(non_portrait_images)
+        return random.sample(image_list, min(len(image_list), 12))
